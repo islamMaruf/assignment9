@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          # Fetch all history for better SonarQube analysis
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -34,8 +37,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           ./sonar-scanner/bin/sonar-scanner \
-            -Dsonar.projectKey=express_sonar_sample \
+            -Dsonar.projectKey=analysis_js_project \
             -Dsonar.sources=. \
-            -Dsonar.host.url=http://localhost:9066 \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
