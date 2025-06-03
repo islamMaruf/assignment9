@@ -29,8 +29,11 @@ jobs:
       - name: Download SonarQube Scanner
         run: |
           wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-          unzip sonar-scanner-cli-*.zip
-          mv sonar-scanner-* sonar-scanner
+          unzip sonar-scanner-cli-5.0.1.3006-linux.zip
+          # Let's see what files were extracted
+          ls -la
+          # Move the extracted directory to sonar-scanner
+          mv sonar-scanner-5.0.1.3006-linux sonar-scanner
 
       - name: Run SonarQube Scanner
         env:
