@@ -38,10 +38,11 @@ jobs:
       - name: Run SonarQube Scanner
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: "http://192.168.49.1:9066" 
         run: |
           ./sonar-scanner/bin/sonar-scanner \
             -Dsonar.projectKey=analysis_js_project \
             -Dsonar.sources=. \
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+            -Dsonar.host.url=${SONAR_HOST_URL} \
+            -Dsonar.login=${SONAR_TOKEN} \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
